@@ -8,23 +8,24 @@ const {
     usuariosInicio,
     registroUsuarios,
     borrarUsuario,
+    obtenerUsuarios,
 } = require('../controllers/users');
 
-//middleware
-const { validateID, validarCampos } = require("../middlewares/validators");
+//middle
+const { validarCampos } = require("../middlewares/validators");
 
-router.get('/',[], usuariosInicio);
+router.get("/bienvenido", obtenerUsuarios);
 
 router.post(
-    '/',
+    '/usuarioInicio',
     [
         check("nombre", "Ingrese su nombre").notEmpty(),
         check("email", "Ingrese email válido").notEmpty(),
         check('telefono').isMobilePhone().withMessage('El número de teléfono no es válido'),
-        check('mensaje').notEmpty().withMessage('El mensaje es obligatorio'),
-        validarCampos,
+        /* check('mensaje').notEmpty().withMessage('El mensaje es obligatorio'), */
+        () => validarCampos
     ],
-    registroUsuarios
+    usuariosInicio
 );
 
 // router.put(
@@ -36,14 +37,14 @@ router.post(
 //     actualizarID
 // );
 
-router.delete(
-    "/:nombre",
-    [
-        check("nombre").notEmpty(), 
-        check("email").isMongoId(), check("email").custom(validateID),
-        validarCampos
-    ],
-    borrarUsuario
-);
+// router.delete(
+    // "/:nombre",
+    // [
+        // check("nombre").notEmpty(), 
+        // // check("email").isMongoId(), check("email").custom(validateID),
+        // validarCampos
+    // ],
+    // borrarUsuario
+// );
 
 module.exports = router;

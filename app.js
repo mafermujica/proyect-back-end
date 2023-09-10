@@ -23,5 +23,5 @@ function scroll(e) {
 	}
 }
 
-$('#navbar a').on('click', scroll);
-$('#reserva').on('click', scroll);
+// $('#navbar a').on('click', scroll);
+// $('#reserva').on('click', scroll);
