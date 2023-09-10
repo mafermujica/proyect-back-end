@@ -17,9 +17,9 @@ const obtenerUsuarios = async (req, res) => {
 
 
 const usuariosInicio = async (req, res) => {
-    const { nombre, telefono, email, id } = req.body;
+    const { nombre, telefono, email, id, mensaje } = req.body;
 
-    const newUsuario = new Users({ nombre, telefono, email, id });
+    const newUsuario = new Users({ nombre, telefono, email, id, mensaje });
 
     await newUsuario.save();
 
@@ -31,7 +31,7 @@ const usuariosInicio = async (req, res) => {
 };
 
 const registroUsuarios = async (req, res) => {
-    const { nombre, telefono, email, id } = req.body;
+    const { nombre, telefono, email, id, mensaje } = req.body;
     try{
         const existingUser = await Users.findOne({ email }); // Buscar si el email ya existe en la base de datos
         if (existingUser) {
@@ -39,7 +39,7 @@ const registroUsuarios = async (req, res) => {
                 error: 'El email ya está registrado',
             });
         }
-        const newUsuario = new Users({ nombre, telefono, email, id });
+        const newUsuario = new Users({ nombre, telefono, email, id, mensaje });
         await newUsuario.save();
 
         res.status(200).json({

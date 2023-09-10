@@ -10,10 +10,16 @@ const UsersSchema = new Schema({
     },
     telefono: {
         type: Number,
+        require: true,
     },
     email: {
         type: String,
+        requiere: true,
+    },
+    mensaje:{
+        type: String,
     }
+
 });
 
 
